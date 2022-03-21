@@ -45,6 +45,8 @@ def save(text, topic, url):
 
 
 def process(row):
+    # Это функция, которая параллельно будет выполняться в pool.map().
+    # Она вызывает все остальные функции (preprocess и save)
     pass
 
 
