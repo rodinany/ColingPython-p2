@@ -28,6 +28,7 @@ from pymorphy2 import MorphAnalyzer
 #   |- 1543....txt
 #   |- .
 #   |- .
+# Имя файлов берём из url
 
 m = MorphAnalyzer()
 
