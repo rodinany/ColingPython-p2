@@ -6,10 +6,10 @@ from app.schemas.recipes import Recipe, Ingredients
 
 
 router = APIRouter()
-df = pd.read_csv('eda.csv')
+df = pd.read_csv(r'C:\Users\rodin\PycharmProjects\ColingPython-p2\seminar_5\app\routers\eda.csv')
 
 
-@router.get('/recipes/{query}')
+@router.get('/recipes/query')
 def search_recipies(query: str) -> dict:
     result = []
     for i in df['name']:
@@ -115,6 +115,19 @@ def top_dif(difficulty: str, topn: int) -> dict:
 
 @router.put('/recipes/new', status_code=status.HTTP_201_CREATED)
 def add_recipe(recipe: Recipe):
+    new_row = pd.DataFrame({"id": recipe.id,
+                            "name": recipe.name,
+                            "ingredients": recipe.ingredients,
+                            "recipe": recipe.recipe,
+                            "img_url": recipe.img_url,
+                            "nutrition_info": {
+                                'callories': recipe.nutrition_info.callories,
+                                "proteins": recipe.nutrition_info.proteins,
+                                "carbs": recipe.nutrition_info.carbs
+                            },
+                            "recipe_url": recipe.recipe_url
+                            })
+    df.append(new_row)
     return recipe
 
 @router.post('/recipes/search')
